@@ -1,2 +1,5 @@
-# [Synthetic Health Data Hackathon 2020](https://rh.biolib.com/event/synthetic-health-data-2020/#teams) Alzheimer's MRI Analysis
-Our [solution](https://biolib.com/Gardariki-Hack/Gardariki-Hack) with [Nikita Baranov](https://www.linkedin.com/in/nbar/) and [Anastasia Tabalina](https://github.com/TabalinaAnastasia).
+# Synthetic Health Data Hackathon 2020
+Participated in the recognition of Alzheimer's on synthetic MRI images with [Nikita Baranov](https://www.linkedin.com/in/nbar/) and [Anastasia Tabalina](https://github.com/TabalinaAnastasia).
+
+Link to hackathon: https://rh.biolib.com/event/synthetic-health-data-2020/<br/>
+Link to our solution: https://biolib.com/Gardariki-Hack/Gardariki-Hack/
