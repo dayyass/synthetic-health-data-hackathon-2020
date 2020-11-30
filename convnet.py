@@ -67,7 +67,7 @@ class ConvDropoutNet(nn.Module):
         # linear layers
         self.linear_1 = LinearDropoutLayer(in_features=128*2*2, out_features=128, dropout=linear_dropout)
         self.linear_2 = LinearDropoutLayer(in_features=128, out_features=64, dropout=linear_dropout)
-        self.linear_3 = LinearDropoutLayer(in_features=64, out_features=n_classes, dropout=linear_dropout)
+        self.linear_3 = nn.Linear(in_features=64, out_features=n_classes)
 
     def forward(self, x):
         x = self.conv_1(x)
@@ -97,7 +97,7 @@ class ConvBatchNormNet(nn.Module):
         # linear layers
         self.linear_1 = LinearBatchNormLayer(in_features=128*2*2, out_features=128)
         self.linear_2 = LinearBatchNormLayer(in_features=128, out_features=64)
-        self.linear_3 = LinearBatchNormLayer(in_features=64, out_features=n_classes)
+        self.linear_3 = nn.Linear(in_features=64, out_features=n_classes)
 
     def forward(self, x):
         x = self.conv_1(x)
