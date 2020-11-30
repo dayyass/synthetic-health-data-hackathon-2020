@@ -1,4 +1,5 @@
 import torch.nn as nn
+from torchvision.models import resnet18
 
 
 class ConvDropoutLayer(nn.Module):
@@ -109,3 +110,26 @@ class ConvBatchNormNet(nn.Module):
         x = self.linear_2(x)
         x = self.linear_3(x)
         return x
+
+
+def make_resnet18(num_classes: int, one_channel_input: bool = False):
+    model = resnet18(num_classes=num_classes)
+
+    if one_channel_input:
+        model.conv1 = nn.Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    return model
+
+
+def make_pretrained_resnet18(num_classes: int, one_channel_input: bool = False):
+    model = resnet18(pretrained=True)
+
+    # average channel params
+    if one_channel_input:
+        avg_channel_weight = model.conv1.weight.data.mean(dim=1, keepdim=True)
+        model.conv1 = nn.Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        model.conv1.weight.data = avg_channel_weight
+
+    if num_classes != 1000:
+        model.fc = nn.Linear(in_features=512, out_features=num_classes, bias=True)
+
+    return model
