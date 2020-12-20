@@ -1,12 +1,15 @@
-import torch
-import numpy as np
 from collections import defaultdict
-from typing import Any, List, Tuple, DefaultDict
+from typing import Any, DefaultDict, List, Tuple
+
+import numpy as np
+import torch
 from sklearn.metrics import accuracy_score, classification_report
 
 
 # train loop on epoch
-def train_epoch(model, dataloader, criterion, optimizer, device) -> DefaultDict[str, List[float]]:
+def train_epoch(
+    model, dataloader, criterion, optimizer, device
+) -> DefaultDict[str, List[float]]:
     metrics = defaultdict(lambda: list())
 
     model.train()
@@ -24,9 +27,9 @@ def train_epoch(model, dataloader, criterion, optimizer, device) -> DefaultDict[
             ground_truth = labels.cpu().numpy().astype(np.int64)
             pred = torch.argmax(outputs, dim=1).cpu().numpy().astype(np.int64)
 
-        metrics['loss'].append(loss.item())
-        metrics['ground_truth'].append(ground_truth)
-        metrics['prediction'].append(pred)
+        metrics["loss"].append(loss.item())
+        metrics["ground_truth"].append(ground_truth)
+        metrics["prediction"].append(pred)
 
     return metrics
 
@@ -46,16 +49,16 @@ def validate_epoch(model, dataloader, criterion, device):
             ground_truth = labels.cpu().numpy().astype(np.int64)
             pred = torch.argmax(outputs, dim=1).cpu().numpy().astype(np.int64)
 
-        metrics['loss'].append(loss.item())
-        metrics['ground_truth'].append(ground_truth)
-        metrics['prediction'].append(pred)
+        metrics["loss"].append(loss.item())
+        metrics["ground_truth"].append(ground_truth)
+        metrics["prediction"].append(pred)
 
     return metrics
 
 
 def metrics_callback(metrics: DefaultDict[str, List[float]]) -> Tuple[float, Any]:
-    y_true = np.hstack(metrics['ground_truth'])
-    y_pred = np.hstack(metrics['prediction'])
+    y_true = np.hstack(metrics["ground_truth"])
+    y_pred = np.hstack(metrics["prediction"])
 
     accuracy = accuracy_score(y_true=y_true, y_pred=y_pred)
     report = classification_report(y_true=y_true, y_pred=y_pred)
@@ -63,10 +66,12 @@ def metrics_callback(metrics: DefaultDict[str, List[float]]) -> Tuple[float, Any
     return accuracy, report
 
 
-def train(model, trainloader, valloader, criterion, optimizer, device, n_epochs, verbose):
+def train(
+    model, trainloader, valloader, criterion, optimizer, device, n_epochs, verbose
+):
     for epoch in range(n_epochs):
         if verbose:
-            print(f'epoch [{epoch + 1}/{n_epochs}]\n')
+            print(f"epoch [{epoch + 1}/{n_epochs}]\n")
 
         # train
         train_metrics = train_epoch(model, trainloader, criterion, optimizer, device)
@@ -75,8 +80,8 @@ def train(model, trainloader, valloader, criterion, optimizer, device, n_epochs,
         train_accuracy, train_report = metrics_callback(train_metrics)
 
         if verbose:
-            print(f'train accuracy: {train_accuracy:.4f}\n')
-            print(f'train metrics:\n{train_report}\n')
+            print(f"train accuracy: {train_accuracy:.4f}\n")
+            print(f"train metrics:\n{train_report}\n")
 
         # validate
         val_metrics = validate_epoch(model, valloader, criterion, device)
@@ -85,6 +90,6 @@ def train(model, trainloader, valloader, criterion, optimizer, device, n_epochs,
         val_accuracy, val_report = metrics_callback(val_metrics)
 
         if verbose:
-            print(f'val accuracy: {val_accuracy:.4f}\n')
-            print(f'val metrics:\n{val_report}\n')
+            print(f"val accuracy: {val_accuracy:.4f}\n")
+            print(f"val metrics:\n{val_report}\n")
             print(f'{"="*53}\n')

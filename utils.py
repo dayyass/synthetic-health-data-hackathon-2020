@@ -1,11 +1,12 @@
 import os
+import random
+from typing import Tuple
+
+import numpy as np
 import shap
 import torch
-import random
-import numpy as np
-from tqdm import tqdm
 from PIL import Image
-from typing import Tuple
+from tqdm import tqdm
 
 
 def set_global_seed(seed: int):
@@ -17,7 +18,6 @@ def set_global_seed(seed: int):
     torch.backends.cudnn.deterministic = True
 
 
-
 def load_images(path: str, verbose: bool = True) -> Tuple[np.ndarray, np.ndarray]:
     images = []
     labels = []
@@ -27,12 +27,12 @@ def load_images(path: str, verbose: bool = True) -> Tuple[np.ndarray, np.ndarray
         listdir = tqdm(listdir)
 
     for image_name in listdir:
-        img_path = '{}/{}'.format(path, image_name)
+        img_path = "{}/{}".format(path, image_name)
         # Catch label from name
         label = int(image_name[-5])
 
         # Artifact from macOS
-        if image_name == '.DS_Store':
+        if image_name == ".DS_Store":
             continue
 
         im = np.array(Image.open(img_path))
@@ -46,9 +46,9 @@ def load_images(path: str, verbose: bool = True) -> Tuple[np.ndarray, np.ndarray
 
 
 def shap_deep_explainer(
-        model: torch.nn.Module,
-        background: torch.Tensor,
-        test_images: torch.Tensor,
+    model: torch.nn.Module,
+    background: torch.Tensor,
+    test_images: torch.Tensor,
 ):
     e = shap.DeepExplainer(model, background)
     shap_values = e.shap_values(test_images)

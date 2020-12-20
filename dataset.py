@@ -1,11 +1,16 @@
+from typing import Callable, Optional
+
 import numpy as np
-from typing import Optional, Callable
 from torch.utils.data import Dataset
 
 
 class MRIDataset(Dataset):
-
-    def __init__(self, images: np.ndarray, labels: np.ndarray, transform: Optional[Callable] = None):
+    def __init__(
+        self,
+        images: np.ndarray,
+        labels: np.ndarray,
+        transform: Optional[Callable] = None,
+    ):
         self.images = images
         self.labels = labels
         self.transform = transform
@@ -23,8 +28,8 @@ class MRIDataset(Dataset):
 
 # TRANSFORMS
 
-class Unsqueeze:
 
+class Unsqueeze:
     def __init__(self, axis=1):
         self.axis = axis
 
@@ -33,7 +38,6 @@ class Unsqueeze:
 
 
 class Repeat:
-
     def __init__(self, n_channel, axis=1):
         self.n_channel = n_channel
         self.axis = axis
