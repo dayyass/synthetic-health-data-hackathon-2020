@@ -1,4 +1,6 @@
 import os
+import torch
+import random
 import numpy as np
 from tqdm import tqdm
 from PIL import Image
@@ -30,3 +32,12 @@ def load_images(path: str, verbose: bool = True) -> Tuple[np.ndarray, np.ndarray
     labels = np.array(labels)
 
     return images, labels
+
+
+def set_global_seed(seed: int):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True

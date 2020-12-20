@@ -22,7 +22,7 @@ def train_epoch(model, dataloader, criterion, optimizer, device) -> DefaultDict[
 
         with torch.no_grad():
             ground_truth = labels.cpu().numpy().astype(np.int64)
-            pred = (outputs > 0.).cpu().numpy().astype(np.int64)
+            pred = torch.argmax(outputs, dim=1).cpu().numpy().astype(np.int64)
 
         metrics['loss'].append(loss.item())
         metrics['ground_truth'].append(ground_truth)
@@ -44,7 +44,7 @@ def validate_epoch(model, dataloader, criterion, device):
             loss = criterion(outputs, labels)
 
             ground_truth = labels.cpu().numpy().astype(np.int64)
-            pred = (outputs > 0.).cpu().numpy().astype(np.int64)
+            pred = torch.argmax(outputs, dim=1).cpu().numpy().astype(np.int64)
 
         metrics['loss'].append(loss.item())
         metrics['ground_truth'].append(ground_truth)
