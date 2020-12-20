@@ -11,6 +11,7 @@ decorator==4.4.2
 defusedxml==0.6.0
 entrypoints==0.3
 future==0.18.2
+importlib-metadata==3.3.0
 ipykernel==5.3.4
 ipython==7.19.0
 ipython-genutils==0.2.0
@@ -25,6 +26,7 @@ jupyter-console==6.2.0
 jupyter-core==4.7.0
 jupyterlab-pygments==0.1.2
 kiwisolver==1.3.1
+llvmlite==0.35.0
 MarkupSafe==1.1.1
 matplotlib==3.3.3
 mistune==0.8.4
@@ -33,8 +35,10 @@ nbconvert==6.0.7
 nbformat==5.0.8
 nest-asyncio==1.4.3
 notebook==6.1.5
+numba==0.52.0
 numpy==1.19.4
 packaging==20.7
+pandas==1.1.5
 pandocfilters==1.4.3
 parso==0.7.1
 pexpect==4.8.0
@@ -48,14 +52,17 @@ Pygments==2.7.2
 pyparsing==2.4.7
 pyrsistent==0.17.3
 python-dateutil==2.8.1
+pytz==2020.4
 pyzmq==20.0.0
 qtconsole==5.0.1
 QtPy==1.9.0
 scikit-learn==0.23.2
 scipy==1.5.4
 Send2Trash==1.5.0
+shap==0.37.0
 six==1.15.0
 sklearn==0.0
+slicer==0.0.3
 terminado==0.9.1
 testpath==0.4.4
 threadpoolctl==2.1.0
@@ -68,3 +75,4 @@ typing-extensions==3.7.4.3
 wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
+zipp==3.4.0
