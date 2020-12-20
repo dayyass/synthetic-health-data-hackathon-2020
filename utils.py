@@ -50,6 +50,9 @@ def shap_deep_explainer(
     background: torch.Tensor,
     test_images: torch.Tensor,
 ):
+    """
+    https://shap.readthedocs.io/en/latest/example_notebooks/deep_explainer/PyTorch%20Deep%20Explainer%20MNIST%20example.html
+    """
     e = shap.DeepExplainer(model, background)
     shap_values = e.shap_values(test_images)
 
