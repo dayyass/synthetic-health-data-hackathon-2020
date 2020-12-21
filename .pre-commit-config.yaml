@@ -13,6 +13,7 @@ repos:
   hooks:
     - id: debug-statements
     - id: trailing-whitespace
+    - id: check-docstring-first
     - id: requirements-txt-fixer
     - id: flake8
       args: ["--ignore", "E501,W503"]
