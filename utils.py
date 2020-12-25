@@ -1,12 +1,13 @@
 import os
 import random
-from typing import Tuple
+from typing import Dict, Tuple
 
 import numpy as np
 import shap
 import torch
 from PIL import Image
 from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 
 def set_global_seed(seed: int):
@@ -61,3 +62,24 @@ def shap_deep_explainer(
 
     # plot the feature attributions
     shap.image_plot(shap_numpy, test_numpy)
+
+
+def visualize_scatter(
+    data_2d: np.ndarray,
+    labels_idx: np.ndarray,
+    idx2label: Dict[int, str],
+    title: str = "",
+    figsize: Tuple = (10, 10),
+) -> None:
+    plt.figure(figsize=figsize)
+    plt.title(title)
+    plt.grid()
+
+    for label_id in np.unique(labels_idx):
+        plt.scatter(
+            data_2d[np.where(labels_idx == label_id), 0],
+            data_2d[np.where(labels_idx == label_id), 1],
+            label=idx2label[label_id],
+        )
+
+    plt.legend()
