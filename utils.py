@@ -2,12 +2,12 @@ import os
 import random
 from typing import Dict, Tuple
 
+import matplotlib.pyplot as plt
 import numpy as np
 import shap
 import torch
 from PIL import Image
 from tqdm import tqdm
-import matplotlib.pyplot as plt
 
 
 def set_global_seed(seed: int):
