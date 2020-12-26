@@ -29,7 +29,7 @@ We solved the synthetic train / synthetic validation task using custom CNN model
 *Pic.1. Model scores.*
 
 ## What is the reason for this difference in metrics?
-We decided to look at the structure of our data. Since they are presented in multidimensional space, we used PCA + T-SNE to visualize the data in two-dimensional space and got the following results on the slide.
+We decided to look at the structure of our data. Since they are presented in multidimensional space, we used PCA + t-SNE to visualize the data in two-dimensional space and got the following results on the slide.
 
 ![t-SNE synthetic images](images/tsne_synth.png "t-SNE synthetic images")<br/>
 *Pic.2.1. t-SNE visualization (synthetic dataset).*
@@ -70,7 +70,7 @@ for the synthetic train / real validation task. Thus, the elimination of some of
 *Pic.5. Hold-out test validation.*
 
 ## Summary
-We have investigated through PCA + T-SNE and adversarial validation that synthetic data differs a lot from real data.
+We have investigated through PCA + t-SNE and adversarial validation that synthetic data differs a lot from real data.
 We assume that some information about the microstructure of the brain is lost in the synthetic data,
 which might be the reason for the low quality of the synthetic train / real validation task.
 To improve model quality, we used the model that distinguishes the synthetic data from the real one
